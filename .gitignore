@@ -3,7 +3,8 @@ out/
 .idea/
 !**/src/main/**/out/
 !**/src/test/**/out/
-Home work number six.iml
+Home work number seven.iml
+lessons/
 ### Eclipse ###
 .apt_generated
 .classpath
