@@ -1,72 +1,67 @@
 package app;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
 
 
-        public static void main(String[] args){
-            // Создание массива и указывание что в нём будет 20 обьектов(чисел)
-            int[] numbers = new int[20];
-            // Создание Рандома
+        public static void main(String[] args) {
+
+            int[] arr = new int[15];
+            int n = arr.length;
             Random random = new Random();
-            // Цикл который рандомизирует числа в Массиве от - 100 до 100
-            for (int i = 0; i < numbers.length; i++) {
-                numbers[i] = random.nextInt(-100,100);
+
+            for (int i = 0; i < n; i++) {
+                arr[i] = random.nextInt(0, 100);
             }
-
-            int sumOfMinus = 0; // переменная для суммы минусовых чисел
-
-            int even = 0;       // переменная для чётных чисел
-            int odd = 0;        // переменная для не чётных чисел
-
-            int min = 0;        // переменная для минимальных
-            int max = 0;        // переменная для максимальных чисел
-
-            // а вот переменная для среднего арефметического числа:
-
-            boolean arephMein = false;
-            double sum = 0; // Переменная Суммы чисел массива
-            int x = 0;      // Создаю переменную которая будет работать как счётчик (не для арифметического числа, а для булевого значения arephMein)
-            double avr = 0; // Среднее арифметическое число
-            int y = 0;      // Создаю переменную которая будет работать как счётчик вот она уже будет работать для вычисления итогового Среднего Арифметического числа
-            // Основной Цикл
-            for (int i : numbers) {
-                if (i % 2 == 0) {even++;}
-                else            {odd++;}
-                if (i > max)    {max = i;}
-                if (i < min)    {min = i;}
-                if (i<0)        {sumOfMinus += i;}
+            System.out.println("before sorting:");
+            for (int i = 0; i < n; i++) {
+                System.out.printf("[%s]", arr[i]);
             }
-
-        // Цикл с Арифметическим числом (его начальными вычислениями)
-            for (int i : numbers) {
-                x++;
+            System.out.println("\n");
 
 
-                if (i < 0) {
-                    arephMein = true;
-                } else if (x == 20 && !arephMein) {
-                    System.out.println("no minus numbers found. The sum of " +
-                            "the minus numbers will be zero, and i cant find arithmetic mean \n");
+            for (int i = 1; i < n; i++) {
+                int key = arr[i];
+                int j = i - 1;
+                while (j >= 0 && arr[j] > key) {
+                    arr[j + 1] = arr[j];
+                    j--;
                 }
-                if (arephMein){
-                    sum += i;
-                    y++;
+                arr[j + 1] = key;
+            }
+
+            System.out.println("after sorting: ");
+            for (int i = 0; i < n; i++) {
+                System.out.printf("[%s]", arr[i]);
+            }
+
+            System.out.println("\n");
+
+            Scanner scan = new Scanner(System.in);
+            System.out.println("enter the number you want to retrieve from the array into the search: ");
+            int target = scan.nextInt();
+
+            int left = 0;
+            int right = n - 1;
+            while (left <= right) {
+
+                int mid = left + (right - left) / 2;
+
+                if (arr[mid] == target) {
+                    System.out.println("number: " + target + " to be in the index: " + mid);
+                    break;
                 }
+                if (arr[mid] < target) {
+                    left = mid + 1;
+                }else{
+                    right = mid - 1;
+                }
+
             }
-        // Основные исчисления Среднего Арифметического числа
-            if (arephMein) {
-                avr = sum / y;
+            if (left > right) {
+                System.out.println("Number " + target + " not found in the array.");
             }
-            System.out.println("sum of minus randomly generated numbers in the array: " + sumOfMinus + "\n" +
-                    "Even numbers: " + even + "\n" + "Odd numbers: " + odd + "\n" + "Smallest number: " + min + "\n" + "largest number: "
-                    + max + "\n" + "sum of the mean arithmetic number in this array: " + avr + "\n");
-//            for (int i = 0; i < numbers.length; i++) {
-//                System.out.printf("[%s]", numbers[i]);
-//            } КОД ВЫВОДА МАССИВА УРАА Я ДОДЕЛАЛ
-
-
-
         }
-    }
+}
