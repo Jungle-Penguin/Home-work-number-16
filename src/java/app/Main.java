@@ -1,67 +1,143 @@
 package app;
 
 import java.util.Random;
-import java.util.Scanner;
 
 public class Main {
+    /*
+Створіть Java програму, яка виконує наступні завдання, використовуючи двовимірний масив (матрицю):
 
+Створіть двовимірний масив цілих чисел розмірністю 4x4.`
+Заповніть матрицю випадковими цілими числами в діапазоні від 1 до 50.`
+Виведіть матрицю на екран у вигляді таблиці.`
+Знайдіть суму всіх елементів в парних рядках (рядок 0, 2) та суму всіх елементів в непарних рядках (рядок 1, 3).`
+Знайдіть добуток всіх елементів в парних стовпцях (стовпцях 0, 2) та добуток всіх елементів в непарних стовпцях (стовпцях 1, 3).`
+Виведіть результати сум та добутків для парних і непарних рядків та стовпців.`
+Перевірте, чи матриця є магічним квадратом. Магічний квадрат - це квадратна матриця, в якій суми всіх рядків, стовпців та діагоналей рівні між собою.
+Залийте виконаний проект на свій GitHub репозиторій, посилання на який зазначте в LMS.
 
-        public static void main(String[] args) {
+*/
 
-            int[] arr = new int[15];
-            int n = arr.length;
-            Random random = new Random();
+    public static void main(String[] args) {
+//        int[][] arr = {{1, 15, 14, 4}, {12, 6, 7, 9}, {8, 10, 11, 5}, {13, 3, 2, 16}}; Проверка на магический кубик
+        int[][] arr = new int[4][4];
 
-            for (int i = 0; i < n; i++) {
-                arr[i] = random.nextInt(0, 100);
-            }
-            System.out.println("before sorting:");
-            for (int i = 0; i < n; i++) {
-                System.out.printf("[%s]", arr[i]);
-            }
-            System.out.println("\n");
+        int zeZero = 0;
+        int onZero = 0;
+        int twZero = 0;
+        int thZero = 0;
+        int zeroZe = 0;
+        int zeroOn = 0;
+        int zeroTw = 0;
+        int zeroTh = 0;
+        int diagonalR = 0;
+        int diagonalL = 0;
+        int pairSum = 0;
+        int nonePairSum = 0;
+        double multiplyPair = 1;
+        double multiplyNonePair = 1;
+        
+        Random random = new Random();
+        for (int i = 0; i < arr.length; i++) {
 
+            for (int j = 0; j < arr[i].length; j++) {
 
-            for (int i = 1; i < n; i++) {
-                int key = arr[i];
-                int j = i - 1;
-                while (j >= 0 && arr[j] > key) {
-                    arr[j + 1] = arr[j];
-                    j--;
-                }
-                arr[j + 1] = key;
-            }
+                arr[i][j] = random.nextInt(1, 51);
 
-            System.out.println("after sorting: ");
-            for (int i = 0; i < n; i++) {
-                System.out.printf("[%s]", arr[i]);
-            }
-
-            System.out.println("\n");
-
-            Scanner scan = new Scanner(System.in);
-            System.out.println("enter the number you want to retrieve from the array into the search: ");
-            int target = scan.nextInt();
-
-            int left = 0;
-            int right = n - 1;
-            while (left <= right) {
-
-                int mid = left + (right - left) / 2;
-
-                if (arr[mid] == target) {
-                    System.out.println("number: " + target + " to be in the index: " + mid);
-                    break;
-                }
-                if (arr[mid] < target) {
-                    left = mid + 1;
-                }else{
-                    right = mid - 1;
-                }
-
-            }
-            if (left > right) {
-                System.out.println("Number " + target + " not found in the array.");
             }
         }
+
+        for (int[] anInt : arr) {
+            for (int i : anInt) {
+                System.out.printf("[%s] ", i);
+            }
+            System.out.println();
+        }
+
+
+
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+//                System.out.println(i + "." + j);
+                if (i == j) {
+                    diagonalL += arr[i][j];
+                }
+
+                switch (j) {
+                    case 0 -> zeroZe += arr[i][j];
+                    case 1 -> zeroOn += arr[i][j];
+                    case 2 -> zeroTw += arr[i][j];
+                    case 3 -> zeroTh += arr[i][j];
+                }
+                switch (i) {
+                    case 0 -> zeZero += arr[i][j];
+                    case 1 -> onZero += arr[i][j];
+                    case 2 -> twZero += arr[i][j];
+                    case 3 -> thZero += arr[i][j];
+                }
+            }
+
+//            System.out.println(zeroZe + " " + zeroOn + " " + zeroTw + " " + zeroTh); System.out.println(diagonalL);
+        }
+
+
+        int y = 3;
+        int x = 0;
+        while (y != -1) {
+            diagonalR += arr[y][x];
+            y--;
+            x++;
+        }
+
+
+
+        for (int i = 0; i < 4; i += 2) {
+            for (int j = 0; j < 4; j++) {
+//                System.out.printf("%s + ", arr[i][j]); output code for debug + (pair)
+                pairSum += arr[i][j];
+            }
+
+        }
+
+        for (int i = 0; i < 4; i += 2) {
+
+            for (int j = 0; j < 4; j++) {
+//                System.out.printf("%s * ", arr[i][j]); output code for debug * (pair)
+                multiplyPair *= arr[i][j];
+            }
+            System.out.println();
+        }
+        for (int i = 1; i < 4; i += 2) {
+
+            for (int j = 0; j < 4; j++) {
+//                System.out.printf("%s * ", arr[i][j]); output code for debug * (not pair)
+                multiplyNonePair *= arr[i][j];
+            }
+            System.out.println();
+        }
+
+        for (int i = 1; i < 4; i += 2) {
+            for (int j = 0; j < 4; j++) {
+//                System.out.printf("%s + ", arr[i][j]); output code for debug + (not pair)
+                nonePairSum += arr[i][j];
+            }
+        }
+
+        int zeOne = zeZero + onZero + twZero + thZero + zeroZe + zeroOn + zeroTw + zeroTh;                       // для проверки на магический кубик
+        int dio = diagonalL + diagonalR + diagonalL + diagonalR + diagonalL + diagonalR + diagonalL + diagonalR; // для проверки на магический кубик
+
+        System.out.println("sum of paired elements on matrix(4x4) and with index 0 2: " + pairSum);
+        System.out.println("Sum of not paired elements on matrix(4x4) and with index 1 3: " + nonePairSum);
+        System.out.println("multiply of paired elements on matrix(4x4) and with index 0 2: " + multiplyPair);
+        System.out.println("multiply of not paired elements on matrix(4x4) and with index 1 3: " + multiplyNonePair);
+
+        if (zeOne == dio) {                              // проверка на магический кубик
+            System.out.println("this is MAGIC CUBE");    // проверка на магический кубик
+        }else{                                           // проверка на магический кубик
+            System.out.println("this is NOT MAGIC CUBE");// проверка на магический кубик
+        }
+
+    }
 }
+
+
