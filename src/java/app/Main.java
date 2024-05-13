@@ -5,7 +5,7 @@ import java.util.Random;
 public class Main {
 
     public static void main(String[] args) {
-//        int[][] arr = {{1, 15, 14, 4}, {12, 6, 7, 9}, {8, 10, 11, 5}, {13, 3, 2, 16}}; Проверка на магический кубик
+//        int[][] arr = {{1, 15, 14, 4}, {12, 6, 7, 9}, {8, 10, 11, 5}, {13, 3, 2, 16}}; Проверка на магический кубиk
         int[][] arr = new int[4][4];
 
         int zeZero = 0;
