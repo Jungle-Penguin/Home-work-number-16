@@ -15,7 +15,7 @@ Home work number ten.iml
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
-
+target/
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
